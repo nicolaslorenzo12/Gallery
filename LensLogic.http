@@ -1,0 +1,6 @@
+@LensLogic_HostAddress = http://localhost:5052
+
+GET {{LensLogic_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
