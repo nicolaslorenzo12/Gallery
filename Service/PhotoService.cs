@@ -22,16 +22,16 @@ namespace LensLogic.Service
             var imageData = GetFileBytes(file);
             var combinedEvents = CombineEvents(events);
             var photo = CreatePhoto(imageData, photoAttempts, photographerExperienceInYears, combinedEvents);
+            var photoPrice = PhotoPricingCalculator.CalculatePhotoPrice(photoAttempts, combinedEvents, photographerExperienceInYears);
             _photoRepository.Add(photo);
         }
 
+
         private byte[] GetFileBytes(IFormFile file)
         {
-            using (var memoryStream = new MemoryStream())
-            {
-                file.CopyTo(memoryStream);
-                return memoryStream.ToArray();
-            }
+            using var memoryStream = new MemoryStream();
+            file.CopyTo(memoryStream);
+            return memoryStream.ToArray();
         }
 
         private SpecialEvent CombineEvents(SpecialEvent[] events)
@@ -55,6 +55,7 @@ namespace LensLogic.Service
             };
         }
 
+       
 
     }
 }

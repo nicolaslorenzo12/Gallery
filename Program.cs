@@ -22,7 +22,6 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddScoped<IPhotoRepository, PhotoRepository>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
 
-// Add in-memory database
 builder.Services.AddDbContext<PhotoDbContext>(options =>
     options.UseInMemoryDatabase("LensLogicDb"));
 
