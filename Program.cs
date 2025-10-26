@@ -19,8 +19,8 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "LensLogic API", Version = "v1" });
 });
 
-builder.Services.AddScoped<IPhotoRepository, PhotoRepository>();
-builder.Services.AddScoped<IPhotoService, PhotoService>();
+builder.Services.AddTransient<IPhotoRepository, PhotoRepository>();
+builder.Services.AddTransient<IPhotoService, PhotoService>();
 
 builder.Services.AddDbContext<PhotoDbContext>(options =>
     options.UseInMemoryDatabase("LensLogicDb"));
