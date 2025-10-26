@@ -21,6 +21,10 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddTransient<IPhotoRepository, PhotoRepository>();
 builder.Services.AddTransient<IPhotoService, PhotoService>();
+builder.Services.AddSingleton<IPhotoPriceStrategy, AttemptPriceStrategy>();
+builder.Services.AddSingleton<IPhotoPriceStrategy, EventPriceStrategy>();
+builder.Services.AddSingleton<IPhotoPriceStrategy, ExperiencePriceStrategy>();
+builder.Services.AddSingleton<PhotoPricingCalculator>();
 
 builder.Services.AddDbContext<PhotoDbContext>(options =>
     options.UseInMemoryDatabase("LensLogicDb"));

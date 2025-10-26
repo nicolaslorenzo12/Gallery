@@ -7,10 +7,12 @@ namespace LensLogic.Service
     public class PhotoService : IPhotoService
     {
         private readonly IPhotoRepository _photoRepository;
+        private readonly PhotoPricingCalculator _photoPricingCalculator;
 
-        public PhotoService(IPhotoRepository photoRepository)
+        public PhotoService(IPhotoRepository photoRepository, PhotoPricingCalculator photoPricingCalculator)
         {
             _photoRepository = photoRepository;
+            _photoPricingCalculator = photoPricingCalculator;
         }
 
         public IEnumerable<Photo> GetAllPhotos() => _photoRepository.GetAll();
@@ -22,7 +24,7 @@ namespace LensLogic.Service
             var imageData = GetFileBytes(file);
             var combinedEvents = CombineEvents(events);
             var photo = CreatePhoto(imageData, photoAttempts, photographerExperienceInYears, combinedEvents);
-            var photoPrice = PhotoPricingCalculator.CalculatePhotoPrice(photoAttempts, combinedEvents, photographerExperienceInYears);
+            var photoPrice = _photoPricingCalculator.Calculate(photo);
             _photoRepository.Add(photo);
         }
 
