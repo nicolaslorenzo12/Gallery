@@ -1,5 +1,5 @@
 ﻿using LensLogic.DTO;
-using LensLogic.Service;
+using LensLogic.Service.PhotoService;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]

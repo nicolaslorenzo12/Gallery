@@ -1,9 +1,13 @@
 using LensLogic.data;
 using LensLogic.repository;
 using LensLogic.Service;
+using LensLogic.Service.PhotoPricingService;
+using LensLogic.Service.PhotoService;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +24,12 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddTransient<IPhotoRepository, PhotoRepository>();
-builder.Services.AddTransient<IPhotoService, PhotoService>();
+builder.Services.AddScoped<IPhotoService, PhotoService>();
+builder.Services.AddSingleton<PhotoPricingCalculator>();
+
+builder.Services.AddSingleton<IPhotoPriceStrategy, AttemptPriceStrategy>();
+builder.Services.AddSingleton<IPhotoPriceStrategy, EventPriceStrategy>();
+builder.Services.AddSingleton<IPhotoPriceStrategy, ExperiencePriceStrategy>();
 
 builder.Services.AddDbContext<PhotoDbContext>(options =>
     options.UseInMemoryDatabase("LensLogicDb"));
