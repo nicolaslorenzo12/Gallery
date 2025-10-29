@@ -54,7 +54,5 @@ namespace LensLogic.Service.PhotoService
                 Events = combinedEvents
             };
         }
-
-
     }
 }

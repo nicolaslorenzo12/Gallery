@@ -44,3 +44,6 @@ Migrations/
 
 # User secrets (optional)
 secrets.json
+
+# Local appsettings
+appsettings.json

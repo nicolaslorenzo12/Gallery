@@ -9,7 +9,7 @@ namespace LensLogic.Model
         public int Id { get; set; }
 
         [Required]
-        [Column("ImageData", TypeName = "varbinary(max)")]
+        [Column("ImageData", TypeName = "longblob")]
         public byte[] ImageData { get; set; }
 
         [Required]
